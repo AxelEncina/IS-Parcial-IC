@@ -11,8 +11,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write  
 
 jobs:
   build:
@@ -41,13 +39,9 @@ jobs:
         pip install pytest
         export PYTHONPATH=src
         pytest
-    
-    concurrency:
-      group: "pages"
-      cancel-in-progress: false
-
-  # Single deploy job since we're just deploying
+  
   deploy:
+    needs: [build]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
