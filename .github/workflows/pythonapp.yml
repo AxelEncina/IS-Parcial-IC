@@ -39,7 +39,21 @@ jobs:
         pip install pytest
         export PYTHONPATH=src
         pytest
-  
+    - name: Send Slack notification
+      uses: ravsamhq/notify-slack-action@v2
+      if: always()
+      with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: "{workflow} has {status_message}"
+          message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
+          footer: "Linked Repo <{repo_url}|{repo}> | <{workflow_url}|View Workflow>"
+          notify_when: "failure"
+      env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATION }}
+
+
+
   deploy:
     name: Deploy
     needs: [build] # Our sonarcloud must pass in order to run the deploy job
@@ -50,3 +64,16 @@ jobs:
         with:
           service-id: ${{ secrets.SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
+
+      - name: Send Slack notification
+        uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+            status: ${{ job.status }}
+            token: ${{ secrets.GITHUB_TOKEN }}
+            notification_title: "{workflow} has {status_message}"
+            message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
+            footer: "Linked Repo <{repo_url}|{repo}> | <{workflow_url}|View Workflow>"
+            notify_when: "failure, success"
+        env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATION }}
