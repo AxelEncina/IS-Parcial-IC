@@ -67,15 +67,12 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   deploy:
     name: Deploy
-    if: ${{ failure() }}
-    concurrency:
-      group: ${{ github.ref }}
-      cancel-in-progress: true
     needs: [build, sonarcloud] # Our sonarcloud must pass in order to run the deploy job
     runs-on: ubuntu-22.04
     steps:
       - name: Deploy to production
         uses: johnbeynon/render-deploy-action@v0.0.8
+        if: ${{ !failure() }}
         with:
           service-id: ${{ secrets.SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
