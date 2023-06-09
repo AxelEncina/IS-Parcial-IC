@@ -67,7 +67,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   deploy:
     name: Deploy
-    if: ${{ always() }}
+    if: ${{ success() }}
     needs: [build, sonarcloud] # Our sonarcloud must pass in order to run the deploy job
     runs-on: ubuntu-22.04
     steps:
