@@ -1,6 +1,7 @@
 from flask import Flask
 var = "Hola Minoli";
-var5 = "Hola Minoli";
+var = "Hola Minoli";
+var = "Hola Minoli"
 var2 = var
 var3 = var2
 var4 = var3
