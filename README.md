@@ -1,6 +1,6 @@
 2do Parcial de Ingeniería de Software
 
-!["ASD"](image.png)
+![Imagen](image-1.png)
 
 SONARCLOUD
 https://sonarcloud.io/project/overview?id=AxelEncina_IntentoCI
