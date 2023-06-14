@@ -1,5 +1,5 @@
 from flask import Flask
-var = "Hola Mino"
+var = "Hola Minoli"
 app = Flask(__name__)
 
 @app.route("/")
