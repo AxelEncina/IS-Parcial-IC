@@ -1,5 +1,5 @@
 from flask import Flask
-var = "Hola Mund";
+var = "Hola Mundo";
 
 app = Flask(__name__)
 
