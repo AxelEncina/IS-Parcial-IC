@@ -1,5 +1,5 @@
 from flask import Flask
-var = "Hola Mundo";
+var = "Hola Mundo cruel";
 
 app = Flask(__name__)
 
@@ -10,6 +10,6 @@ def index():
 
 if __name__ == "__main__":
     app.run()
-
+7
 def index2():
     return
