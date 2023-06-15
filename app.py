@@ -1,6 +1,6 @@
 from flask import Flask
 
-var = "Hola Mundo!!"
+var = "Hola Mundo"
 
 app = Flask(__name__)
 
